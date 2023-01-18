@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block header %}
+  {% if is_edit %}Удалить расчет
+  {% else %}Удалить расчет{% endif %}
+{% endblock header %}
+{% block content %}
+<br><br><br><br><br>
+<h6><center>Вы действительно хотите удалить расчет № {{ calc_id }}?
+<br><br><br>
+<div class="row"><center>
+  <a
+    class="btn btn-danger btn-xs"
+    href={% url 'price_net:calc_delete' calc_id %}>
+    Подтвердить
+  </a><br><br>
+  <a
+    class="btn btn-danger btn-xs"
+    href={% url 'price_net:calc_detail' calc_id %}>
+    Отмена
+  </a>
+</div>
+{% endblock %}

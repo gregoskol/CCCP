@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block header %}
+  Сводная таблица отчетов
+{% endblock header %}
+{% block content %}
+  <div class="row">
+    <aside class="col-12 col-md-2" align="left"> 
+    </aside> 
+    <aside class="col-12 col-md-1" align="left"> 
+      <h6>Расчет №
+    </aside> 
+    <aside class="col-12 col-md-3" align="left"> 
+      <h6>Клиент
+    </aside>
+    <aside class="col-12 col-md-1" align="left"> 
+      <h6>Длина, м
+    </aside> 
+    <aside class="col-12 col-md-1" align="left"> 
+      <h6>Ширина, м
+    </aside> 
+    <aside class="col-12 col-md-1" align="left"> 
+      <h6>Ячейка, мм
+    </aside>
+    <aside class="col-12 col-md-2" align="left"> 
+      <h6>Стоимость, руб
+    </aside>
+  </div>
+  {% for calc in page_obj %}
+    <div class="prices">
+    <div class="row">
+      <aside class="col-12 col-md-2" align="left"> 
+      </aside> 
+      <aside class="col-12 col-md-1" align="left"> 
+        <a href="{% url 'price_net:calc_detail' calc.number %}">{{ calc.number }}</a>
+      </aside> 
+      <aside class="col-12 col-md-3" align="left"> 
+        {{ calc.client }}
+      </aside>
+      <aside class="col-12 col-md-1" align="left"> 
+        {{ calc.rope_lenght }}
+      </aside> 
+      <aside class="col-12 col-md-1" align="left"> 
+        {{ calc.rope_width }}
+      </aside> 
+      <aside class="col-12 col-md-1" align="left"> 
+        {{ calc.rope_cell }}
+      </aside>
+      <aside class="col-12 col-md-2" align="left"> 
+        {{ calc.price_total|floatformat:2 }}
+      </aside>
+    </div>
+    </div>
+  {% endfor %}
+  {% include 'includes/paginator.html' %}
+{% endblock %}

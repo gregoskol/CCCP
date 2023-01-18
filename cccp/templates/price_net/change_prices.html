@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% block header %}
+  Редактировать цены
+{% endblock header %}
+{% block content %}
+<div class="card-body">        
+  <form method="post" enctype="multipart/form-data"
+  action="{% url "price_net:change_prices" rope.pk %}">
+  {% csrf_token %}    
+  <div class="row">
+    <aside class="col-12 col-md-4" align="center"> 
+    </aside> 
+    <aside class="col-12 col-md-2" align="left"> 
+      <h5>Тип каната
+    </aside>
+    <aside class="col-12 col-md-2">
+      <h5>{{ rope.type }}
+    </aside>
+  </div><br>
+  <div class="row">
+    <aside class="col-12 col-md-4" align="center"> 
+    </aside> 
+    <aside class="col-12 col-md-2" align="left"> 
+      <h5>Цена
+    </aside>
+    <aside class="col-12 col-md-2">
+      <input type="number" step="0.01" name="price" cols="1" rows="1" class="form-control" id="id_price"></input>
+    </aside>
+    <script>document.getElementById("id_price").value = {{ rope.price }};</script>
+  </div><br>
+  <div class="row">
+    <aside class="col-12 col-md-4" align="center"> 
+    </aside> 
+    <aside class="col-12 col-md-2" align="left"> 
+      <h5>Коуш
+    </aside>
+    <aside class="col-12 col-md-2">
+      <input type="number" step="0.1" name="price_thimble" cols="1" rows="1" class="form-control" id="id_price_thimble"></input>
+    </aside>
+    <script>document.getElementById("id_price_thimble").value = {{ rope.price_thimble }};</script>
+  </div><br>
+  <div class="row">
+    <aside class="col-12 col-md-4" align="center"> 
+    </aside> 
+    <aside class="col-12 col-md-2" align="left"> 
+      <h5>Огон
+    </aside>
+    <aside class="col-12 col-md-2">
+      <input type="number" step="0.1" name="price_oogen" cols="1" rows="1" class="form-control" id="id_price_oogen"></input>
+    </aside>
+    <script>document.getElementById("id_price_oogen").value = {{ rope.price_oogen }};</script>
+  </div><br>
+  <div class="row">
+    <aside class="col-12 col-md-4" align="center"> 
+    </aside> 
+    <aside class="col-12 col-md-2" align="left"> 
+      <h5>Скрещивание
+    </aside>
+    <aside class="col-12 col-md-2">
+      <input type="number" step="0.1" name="price_crossing" cols="1" rows="1" class="form-control" id="id_price_crossing"></input>
+    </aside>
+    <script>document.getElementById("id_price_crossing").value = {{ rope.price_crossing }};</script>
+  </div><br>
+  <div class="row">
+    <aside class="col-12 col-md-4" align="center"> 
+    </aside> 
+    <aside class="col-12 col-md-2" align="left"> 
+      <h5>Сплесень
+    </aside>
+    <aside class="col-12 col-md-2">
+      <input type="number" step="0.1" name="price_splice" cols="1" rows="1" class="form-control" id="id_price_splice"></input>
+    </aside>
+    <script>document.getElementById("id_price_splice").value = {{ rope.price_splice }};</script>
+  </div><br>
+    <div class="d-flex justify-content-end">
+      <button type="submit" class="btn btn-danger btn-xs">
+        Сохранить
+      </button>
+    </div>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% block header %}
+  Цены на работы
+{% endblock header %}
+{% block content %}
+  <h6>Цены на работы</h6>
+  <div class="row">
+    <aside class="col-12 col-md-2" align="left"> 
+      <h6>Тип каната
+    </aside> 
+    <aside class="col-12 col-md-2" align="left"> 
+      <h6>Цена
+    </aside>
+    <aside class="col-12 col-md-2" align="left"> 
+      <h6>Коуш
+    </aside> 
+    <aside class="col-12 col-md-2" align="left"> 
+      <h6>Огон
+    </aside> 
+    <aside class="col-12 col-md-2" align="left"> 
+      <h6>Скрещивание
+    </aside>
+    <aside class="col-12 col-md-2" align="left"> 
+      <h6>Сплесень
+    </aside>
+  </div>
+  {% for rope in ropes %}
+  <div class="prices">
+  <div class="row">
+    <aside class="col-12 col-md-2" align="left"> 
+      <a href="{% url 'price_net:change_prices' rope.pk %}">{{ rope.type }}</a>
+    </aside> 
+    <aside class="col-12 col-md-2" align="left"> 
+      {% if rope.price %}{{ rope.price }}
+      {% else %}--{% endif %}
+    </aside>
+    <aside class="col-12 col-md-2" align="left"> 
+      {% if rope.price_thimble %}{{ rope.price_thimble }}
+      {% else %}--{% endif %}
+    </aside> 
+    <aside class="col-12 col-md-2" align="left"> 
+      {% if rope.price_oogen %}{{ rope.price_oogen }}
+      {% else %}--{% endif %}
+    </aside> 
+    <aside class="col-12 col-md-2" align="left"> 
+      {% if rope.price_crossing %}{{ rope.price_crossing }}
+      {% else %}--{% endif %}
+    </aside>
+    <aside class="col-12 col-md-2" align="left"> 
+      {% if rope.price_splice %}{{ rope.price_splice }}
+      {% else %}--{% endif %}
+    </aside>
+  </div>
+  </div>
+  {% endfor %}
+{% endblock %}

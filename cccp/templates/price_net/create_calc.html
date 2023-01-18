@@ -1,0 +1,233 @@
+{% extends 'base.html' %}
+{% block header %}
+  {% if is_edit %}Редактировать расчет
+  {% else %}Новый расчет{% endif %}
+{% endblock header %}
+{% block content %}
+<div class="card-body">        
+  <form method="post" enctype="multipart/form-data"
+  {% if is_edit %}action="{% url "price_net:calc_edit" calc.number %}"
+  {% else %}action="{% url "price_net:calc_create" %}"{% endif %}>
+  {% csrf_token %}    
+    <div class="row">   
+      <aside class="col-12 col-md-2" align="left"> 
+        <h5>Название сети
+      </aside> 
+      <aside class="col-12 col-md-4"> 
+        <textarea name="name_of_rope" cols="1" rows="1" class="form-control" id="id_name_of_rope">{{ calc.name_of_rope }}</textarea>
+      </aside> 
+      <aside class="col-12 col-md-2" align="center"> 
+        <h5>Клиент
+      </aside> 
+      <aside class="col-12 col-md-4"> 
+        <textarea name="client" cols="1" rows="1" class="form-control" id="id_client">{{ calc.client }}</textarea>
+      </aside> 
+    </div><br>
+    <div class="row">
+      <aside class="col-12 col-md-3" align="left"> 
+        <h5>Наценка на материалы
+      </aside>
+      <aside class="col-12 col-md-1">
+        <input type="number" step="0.1" name="margin" value="calc.margin" cols="1" rows="1" class="form-control" required id="id_margin"></input>
+      </aside>
+      <script>document.getElementById("id_margin").value = {{ calc.margin }};</script>
+      <aside class="col-12 col-md-2" align="center"> 
+        <h5>Номер счета
+      </aside> 
+      <aside class="col-12 col-md-1"> 
+        <textarea name="number_of_check" cols="1" rows="1" class="form-control" id="id_number_of_check">{{ calc.number_of_check }}</textarea>
+      </aside> 
+      <aside class="col-12 col-md-3" align="center"> 
+        <h5>Дата счета
+      </aside>
+      <aside class="col-12 col-md-2"> 
+        <input type="date" name="date_of_check" cols="1" rows="1" class="form-control" id="id_date_of_check"></input>
+      </aside>
+      <script>
+        document.getElementById("id_date_of_check").value = "{{ date }}";
+      </script>
+    </div><br>
+    <div class="row">     
+      <aside class="col-12 col-md-2" align="leftr"> 
+        <h5>Размер сети:
+      </aside>
+      <aside class="col-12 col-md-1" align="center"> 
+      </aside>
+      <aside class="col-12 col-md-2" align="center"> 
+        <h5>длина, м
+      </aside> 
+      <aside class="col-12 col-md-1"> 
+        <input type="number" step="0.01" name="rope_lenght" cols="1" rows="1" class="form-control" required id="id_rope_lenght"></input>
+      </aside> 
+      <script>document.getElementById("id_rope_lenght").value = {{ calc.rope_lenght }};</script>
+      <aside class="col-12 col-md-2" align="center"> 
+        <h5>ширина, м
+      </aside> 
+      <aside class="col-12 col-md-1"> 
+        <input type="number" step="0.01" name="rope_width" cols="1" rows="1" class="form-control" required id="id_rope_width"></input>
+      </aside> 
+      <script>document.getElementById("id_rope_width").value = {{ calc.rope_width }};</script>
+      <aside class="col-12 col-md-2" align="center"> 
+        <h5>ячейка, мм
+      </aside> 
+      <aside class="col-12 col-md-1"> 
+        <input type="number" name="rope_cell" cols="1" rows="1" class="form-control" required id="id_rope_cell"></input>
+      </aside> 
+      <script>document.getElementById("id_rope_cell").value = {{ calc.rope_cell }};</script>
+    </div><br>
+    <div class="row">     
+      <aside class="col-12 col-md-2" align="leftr"> 
+        <h5>Канат продольный
+      </aside>
+      <aside class="col-12 col-md-2" align="center"> 
+        <select name="longitud" class="form-control" required id="id_longitud">
+          {% for rope in form.longitud %}
+            {{ rope }}
+          {% endfor %}
+        </select>
+      </aside>
+      <aside class="col-12 col-md-2" align="center"> 
+        <h5>Канат поперечный
+      </aside>
+      <aside class="col-12 col-md-2" align="center"> 
+        <select name="across" class="form-control" required id="id_across">
+          {% for rope in form.across %}
+            {{ rope }}
+          {% endfor %}
+        </select>
+      </aside>
+      <aside class="col-12 col-md-2" align="center"> 
+        <h5>Ликтрос
+      </aside>
+      <aside class="col-12 col-md-2" align="center"> 
+        <select name="liktros" class="form-control" id="id_liktros">
+          {% for rope in form.liktros %}
+            {{ rope }}
+          {% endfor %}
+        </select>
+      </aside>
+    </div><br>
+    <div class="row">     
+      <aside class="col-12 col-md-2" align="leftr"> 
+        <h5>Коуш: кол-во
+      </aside>
+      <aside class="col-12 col-md-1" align="center"> 
+        <input type="number" name="thimble_amount" cols="1" rows="1" class="form-control" id="id_thimble_amount"></input>
+      </aside> 
+      <script>document.getElementById("id_thimble_amount").value = {{ calc.thimble_amount }};</script>
+      <aside class="col-12 col-md-2" align="center"> 
+        <h5>цена за ед, руб
+      </aside> 
+      <aside class="col-12 col-md-1" align="center"> 
+        <input type="number" name="thimble_price_one" cols="1" rows="1" class="form-control" id="id_thimble_price_one"></input>
+      </aside> 
+      <script>document.getElementById("id_thimble_price_one").value = {{ calc.thimble_price_one }};</script>
+      <aside class="col-12 col-md-2" align="center"> 
+        <h5>Зажимы: кол-во
+      </aside>
+      <aside class="col-12 col-md-1" align="center"> 
+        <input type="number" name="clamp_amount" cols="1" rows="1" class="form-control" id="id_clamp_amount"></input>
+      </aside> 
+      <script>document.getElementById("id_clamp_amount").value = {{ calc.clamp_amount }};</script>
+      <aside class="col-12 col-md-2" align="center"> 
+        <h5>цена за ед, руб
+      </aside> 
+      <aside class="col-12 col-md-1" align="center"> 
+        <input type="number" name="clamp_price_one" cols="1" rows="1" class="form-control" id="id_clamp_price_one"></input>
+      </aside> 
+      <script>document.getElementById("id_clamp_price_one").value = {{ calc.clamp_price_one }};</script>
+    </div><br>
+    <div class="row">     
+      <aside class="col-12 col-md-2" align="leftr"> 
+        <h5>Кольца nor: кол-во
+      </aside>
+      <aside class="col-12 col-md-1" align="center"> 
+        <input type="number" name="nor_amount" cols="1" rows="1" class="form-control" id="id_nor_amount"></input>
+      </aside> 
+      <script>document.getElementById("id_nor_amount").value = {{ calc.nor_amount }};</script>
+      <aside class="col-12 col-md-2" align="center"> 
+        <h5>цена за ед, руб
+      </aside> 
+      <aside class="col-12 col-md-1" align="center"> 
+        <input type="number" name="nor_price_one" cols="1" rows="1" class="form-control" id="id_nor_price_one"></input>
+      </aside> 
+      <script>document.getElementById("id_nor_price_one").value = {{ calc.nor_price_one }};</script>
+      <aside class="col-12 col-md-2" align="center"> 
+        <h5>Заплетка коуша
+      </aside> 
+      <aside class="col-12 col-md-2" align="center"> 
+        <select name="braid_thimble" class="form-control" id="id_braid_thimble">
+          {% for rope in form.braid_thimble %}
+            {{ rope }}
+          {% endfor %}
+        </select>
+      </aside>
+      <aside class="col-12 col-md-1" align="center"> 
+        <h5>кол-во
+      </aside>
+      <aside class="col-12 col-md-1" align="center"> 
+        <input type="number" name="braid_thimble_amount" cols="1" rows="1" class="form-control" id="id_braid_thimble_amount"></input>
+      </aside>
+      <script>document.getElementById("id_braid_thimble_amount").value = {{ calc.braid_thimble_amount }};</script>
+    </div><br>
+    <div class="row">     
+      <aside class="col-12 col-md-2" align="leftr"> 
+        <h5>Скрещивание
+      </aside>
+      <aside class="col-12 col-md-2" align="center"> 
+        <select name="crossing" class="form-control" id="id_crossing">
+          {% for rope in form.crossing %}
+            {{ rope }}
+          {% endfor %}
+        </select>
+      </aside>
+      <aside class="col-12 col-md-2" align="center"> 
+        <h5>Сплесень
+      </aside>
+      <aside class="col-12 col-md-2" align="center"> 
+        <select name="splice" class="form-control" id="id_splice">
+          {% for rope in form.splice %}
+            {{ rope }}
+          {% endfor %}
+        </select>
+      </aside>
+      <aside class="col-12 col-md-2" align="center"> 
+        <h5>Заплетка огона
+      </aside>
+      <aside class="col-12 col-md-2" align="center"> 
+        <select name="braid_oogen" class="form-control" id="id_braid_oogen">
+          {% for rope in form.braid_oogen %}
+            {{ rope }}
+          {% endfor %}
+        </select>
+      </aside>
+    </div><br>
+    <div class="row">     
+      <aside class="col-12 col-md-2" align="leftr"> 
+        <h5>Скидка %
+      </aside>
+      <aside class="col-12 col-md-1" align="center"> 
+        <input type="number" name="discount" cols="1" rows="1" class="form-control" id="id_discount"></input>
+      </aside>
+      <script>document.getElementById("id_discount").value = {{ calc.discount }};</script>
+      <aside class="col-12 col-md-2" align="center"> 
+        <h5>Срок выполнения
+      </aside>
+      <aside class="col-12 col-md-1" align="center"> 
+        <textarea name="deadline" cols="1" rows="1" class="form-control" id="id_deadline">{{ calc.deadline }}</textarea>
+      </aside>
+      <aside class="col-12 col-md-2" align="center"> 
+        <h5>Комментарий
+      </aside>
+      <aside class="col-12 col-md-4" align="center"> 
+        <textarea name="comment" cols="1" rows="1" class="form-control" id="id_comment">{{ calc.comment }}</textarea>
+      </aside>
+    </div><br>
+    <div class="d-flex justify-content-end">
+      <button type="submit" class="btn btn-danger btn-xs">
+        Рассчитать
+      </button>
+    </div>
+  </form>
+</div>
+{% endblock %}

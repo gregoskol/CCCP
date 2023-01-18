@@ -1,0 +1,356 @@
+{% extends 'base.html' %}
+{% block header %}
+  Расчет № {{ calc.number }}
+{% endblock header %}
+{% block content %}
+  <h6>Расчет № {{ calc.number }}</h6>
+  <div class="row">
+    <aside class="col-12 col-md-2" align="left"> 
+      <h6>Клиент
+    </aside> 
+    <aside class="col-12 col-md-10" align="left"> 
+      {{ calc.client }}
+    </aside>
+  </div>
+  <div class="row">
+    <aside class="col-12 col-md-2" align="left"> 
+      <h6>Название сети
+    </aside> 
+    <aside class="col-12 col-md-6" align="left"> 
+      {{ calc.name_of_rope }}
+    </aside>
+    <aside class="col-12 col-md-2" align="left"> 
+      <h6>Дата счета
+    </aside> 
+    <aside class="col-12 col-md-2" align="left"> 
+      {% if calc.date_of_check %}
+        {{ calc.date_of_check }}
+      {% endif %}
+    </aside>
+  </div>
+  <div class="row">
+    <aside class="col-12 col-md-2" align="left"> 
+      <h6>Номер счета
+    </aside> 
+    <aside class="col-12 col-md-2" align="left"> 
+      {{ calc.number_of_check }}
+    </aside>
+    <aside class="col-12 col-md-2" align="left"> 
+      <h6>Срок выполнения
+    </aside> 
+    <aside class="col-12 col-md-2" align="left"> 
+      {{ calc.deadline }}
+    </aside>
+    <aside class="col-12 col-md-2" align="left"> 
+      <h6>Наценка на материалы
+    </aside> 
+    <aside class="col-12 col-md-2" align="left"> 
+      {{ calc.margin }}
+    </aside>
+  </div>
+  <div class="row">
+    <aside class="col-12 col-md-2" align="left"> 
+      <h6>Комментарий
+    </aside> 
+    <aside class="col-12 col-md-10" align="left"> 
+      {{ calc.comment }}
+    </aside>
+  </div>
+  <div class="row">
+    <aside class="col-12 col-md-2" align="left"> 
+      <h6>Размер сети
+    </aside> 
+    <aside class="col-12 col-md-2" align="left"> 
+      <h6>Длина, м
+    </aside> 
+    <aside class="col-12 col-md-2" align="left"> 
+      <h6>Ширина, м
+    </aside> 
+    <aside class="col-12 col-md-2" align="left"> 
+      <h6>Ячейка, мм
+    </aside> 
+  </div>
+  <div class="row">
+    <aside class="col-12 col-md-2" align="left"> 
+    </aside> 
+    <aside class="col-12 col-md-2" align="left"> 
+      {{ calc.rope_lenght }}
+    </aside>
+    <aside class="col-12 col-md-2" align="left"> 
+      {{ calc.rope_width }}
+    </aside>
+    <aside class="col-12 col-md-2" align="left"> 
+      {{ calc.rope_cell }}
+    </aside>
+  </div>
+  <div class="row">
+    <aside class="col-12 col-md-2" align="left"> 
+      <h6>Наименование
+    </aside> 
+    <aside class="col-12 col-md-2" align="left"> 
+      <h6>Тип каната
+    </aside> 
+    <aside class="col-12 col-md-2" align="left"> 
+      <h6>Длина каната, м
+    </aside>
+    <aside class="col-12 col-md-2" align="left"> 
+      <h6>Количество, шт
+    </aside>
+    <aside class="col-12 col-md-2" align="left"> 
+      <h6>Цена прайса за ед., руб
+    </aside>
+    <aside class="col-12 col-md-2" align="left"> 
+      <h6>Итого, руб
+    </aside>
+  </div>
+  <div class="prices">
+  <div class="row">
+    <aside class="col-12 col-md-2" align="left"> 
+      <h6>Канат продольный
+    </aside> 
+    <aside class="col-12 col-md-2" align="left"> 
+      {{ calc.longitud }}
+    </aside> 
+    <aside class="col-12 col-md-2" align="left"> 
+      {{ calc.longitud_lenght|floatformat:2 }}
+    </aside>
+    <aside class="col-12 col-md-2" align="left"> 
+      {{ calc.longitud_amount }}
+    </aside> 
+    <aside class="col-12 col-md-2" align="left"> 
+      {{ calc.longitud_price_one }}
+    </aside>
+    <aside class="col-12 col-md-2" align="left"> 
+      {{ calc.longitud_price_total|floatformat:2 }}
+    </aside> 
+  </div>
+  </div>
+  <div class="prices">
+  <div class="row">
+    <aside class="col-12 col-md-2" align="left"> 
+      <h6>Канат поперечный
+    </aside> 
+    <aside class="col-12 col-md-2" align="left"> 
+      {{ calc.across }}
+    </aside> 
+    <aside class="col-12 col-md-2" align="left"> 
+      {{ calc.across_lenght|floatformat:2 }}
+    </aside>
+    <aside class="col-12 col-md-2" align="left"> 
+      {{ calc.across_amount }}
+    </aside> 
+    <aside class="col-12 col-md-2" align="left"> 
+      {{ calc.across_price_one }}
+    </aside>
+    <aside class="col-12 col-md-2" align="left"> 
+      {{ calc.across_price_total|floatformat:2 }}
+    </aside> 
+  </div>
+  </div>
+  <div class="prices">
+  <div class="row">
+    <aside class="col-12 col-md-2" align="left"> 
+      <h6>Ликтрос
+    </aside> 
+    <aside class="col-12 col-md-2" align="left"> 
+      {{ calc.liktros }}
+    </aside> 
+    <aside class="col-12 col-md-2" align="left"> 
+      {{ calc.liktros_lenght|floatformat:2 }}
+    </aside>
+    <aside class="col-12 col-md-2" align="left"> 
+      {{ calc.liktros_amount }}
+    </aside> 
+    <aside class="col-12 col-md-2" align="left"> 
+      {{ calc.liktros_price_one }}
+    </aside>
+    <aside class="col-12 col-md-2" align="left"> 
+      {{ calc.liktros_price_total|floatformat:2 }}
+    </aside> 
+  </div>
+  </div>
+  <div class="prices">
+  <div class="row">
+    <aside class="col-12 col-md-2" align="left"> 
+      <h6>Коуш
+    </aside> 
+    <aside class="col-12 col-md-2" align="left"> 
+    </aside> 
+    <aside class="col-12 col-md-2" align="left"> 
+    </aside>
+    <aside class="col-12 col-md-2" align="left"> 
+      {{ calc.thimble_amount }}
+    </aside> 
+    <aside class="col-12 col-md-2" align="left"> 
+      {{ calc.thimble_price_one }}
+    </aside>
+    <aside class="col-12 col-md-2" align="left"> 
+      {{ calc.thimble_price_total }}
+    </aside> 
+  </div>
+  </div>
+  <div class="prices">
+  <div class="row">
+    <aside class="col-12 col-md-2" align="left"> 
+      <h6>Зажимы
+    </aside> 
+    <aside class="col-12 col-md-2" align="left"> 
+    </aside> 
+    <aside class="col-12 col-md-2" align="left"> 
+    </aside>
+    <aside class="col-12 col-md-2" align="left"> 
+      {{ calc.clamp_amount }}
+    </aside> 
+    <aside class="col-12 col-md-2" align="left"> 
+      {{ calc.clamp_price_one }}
+    </aside>
+    <aside class="col-12 col-md-2" align="left"> 
+      {{ calc.clamp_price_total }}
+    </aside> 
+  </div>
+  </div>
+  <div class="prices">
+  <div class="row">
+    <aside class="col-12 col-md-2" align="left"> 
+      <h6>Кольца nor
+    </aside> 
+    <aside class="col-12 col-md-2" align="left"> 
+    </aside> 
+    <aside class="col-12 col-md-2" align="left"> 
+    </aside>
+    <aside class="col-12 col-md-2" align="left"> 
+      {{ calc.nor_amount }}
+    </aside> 
+    <aside class="col-12 col-md-2" align="left"> 
+      {{ calc.nor_price_one }}
+    </aside>
+    <aside class="col-12 col-md-2" align="left"> 
+      {{ calc.nor_price_total }}
+    </aside> 
+  </div>
+  </div>
+  <div class="prices">
+  <div class="row">
+    <aside class="col-12 col-md-2" align="left"> 
+      <h6>Скрещивание
+    </aside> 
+    <aside class="col-12 col-md-2" align="left"> 
+      {{ calc.crossing }}
+    </aside> 
+    <aside class="col-12 col-md-2" align="left"> 
+    </aside>
+    <aside class="col-12 col-md-2" align="left"> 
+      {{ calc.crossing_amount }}
+    </aside> 
+    <aside class="col-12 col-md-2" align="left"> 
+      {{ calc.crossing_price_one }}
+    </aside>
+    <aside class="col-12 col-md-2" align="left"> 
+      {{ calc.crossing_price_total }}
+    </aside> 
+  </div>
+  </div>
+  <div class="prices">
+  <div class="row">
+    <aside class="col-12 col-md-2" align="left"> 
+      <h6>Заплетка коуша
+    </aside> 
+    <aside class="col-12 col-md-2" align="left"> 
+      {{ calc.braid_thimble }}
+    </aside> 
+    <aside class="col-12 col-md-2" align="left"> 
+    </aside>
+    <aside class="col-12 col-md-2" align="left"> 
+      {{ calc.braid_thimble_amount }}
+    </aside> 
+    <aside class="col-12 col-md-2" align="left"> 
+      {{ calc.braid_thimble_price_one }}
+    </aside>
+    <aside class="col-12 col-md-2" align="left"> 
+      {{ calc.braid_thimble_price_total }}
+    </aside> 
+  </div>
+  </div>
+  <div class="prices">
+  <div class="row">
+    <aside class="col-12 col-md-2" align="left"> 
+      <h6>Сплесень
+    </aside> 
+    <aside class="col-12 col-md-2" align="left"> 
+      {{ calc.splice }}
+    </aside> 
+    <aside class="col-12 col-md-2" align="left"> 
+    </aside>
+    <aside class="col-12 col-md-2" align="left"> 
+      {{ calc.splice_amount }}
+    </aside> 
+    <aside class="col-12 col-md-2" align="left"> 
+      {{ calc.splice_price_one }}
+    </aside>
+    <aside class="col-12 col-md-2" align="left"> 
+      {{ calc.splice_price_total }}
+    </aside> 
+  </div>
+  </div>
+  <div class="prices">
+  <div class="row">
+    <aside class="col-12 col-md-2" align="left"> 
+      <h6>Заплетка огона
+    </aside> 
+    <aside class="col-12 col-md-2" align="left"> 
+      {{ calc.braid_oogen }}
+    </aside> 
+    <aside class="col-12 col-md-2" align="left"> 
+    </aside>
+    <aside class="col-12 col-md-2" align="left"> 
+      {{ calc.braid_oogen_amount }}
+    </aside> 
+    <aside class="col-12 col-md-2" align="left"> 
+      {{ calc.braid_oogen_price_one }}
+    </aside>
+    <aside class="col-12 col-md-2" align="left"> 
+      {{ calc.braid_oogen_price_total }}
+    </aside> 
+  </div>
+  </div>
+  <div class="row">
+    <aside class="col-12 col-md-2" align="left"> 
+      <h6>Стоимость по расчету
+    </aside> 
+    <aside class="col-12 col-md-2" align="left"> 
+      {{ calc.price_before_discount|floatformat:2 }}
+    </aside>
+  </div>
+  <div class="row">
+    <aside class="col-12 col-md-2" align="left"> 
+      <h6>Скидка, %
+    </aside> 
+    <aside class="col-12 col-md-2" align="left"> 
+      {{ calc.discount }}
+    </aside>
+  </div>
+  <div class="row">
+    <aside class="col-12 col-md-2" align="left"> 
+      <h6>Итого по счету, руб
+    </aside> 
+    <aside class="col-12 col-md-2" align="left"> 
+      {{ calc.price_total|floatformat:2 }}
+    </aside>
+    <aside class="col-12 col-md-5" align="left"> 
+    </aside>
+    <aside class="col-12 col-md-1" align="left"> 
+      <a
+        class="btn btn-danger btn-xs"
+        href={% url 'price_net:calc_edit' calc.number %}>
+        Изменить
+      </a>
+    </aside>
+    <aside class="col-12 col-md-1" align="left"> 
+      <a
+        class="btn btn-danger btn-xs"
+        href={% url 'price_net:calc_delete_confirm' calc.number %}>
+        Удалить
+      </a>
+    </aside>
+  </div>
+{% endblock %}
